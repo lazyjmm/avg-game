@@ -1,0 +1,16 @@
+-- 存档表
+CREATE TABLE `save_slots` (
+    `slot` INT PRIMARY KEY,              -- 存档槽位 1,2,3...
+    `save_data` JSON NOT NULL,           -- 完整游戏状态（UtaVN 序列化数据）
+    `scene_name` VARCHAR(255),           -- 存档时所在场景名（供显示）
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 对话历史表（也可由前端维护，但后端存一份便于跨设备）
+CREATE TABLE `dialogue_history` (
+    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `session_id` VARCHAR(64) NOT NULL,   -- 一次游戏会话ID
+    `speaker` VARCHAR(50) NOT NULL,
+    `content` TEXT NOT NULL,
+    `timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP
+);
